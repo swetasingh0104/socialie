@@ -1,9 +1,27 @@
 
+const user = require('../models/user');
 const User = require('../models/user');
 module.exports.profile = function(req, res){
-    return res.render('users_profile',{
-        title: 'user profile setup'
-    });
+    if(req.cookies.user_id){
+        User.findById(req.cookies.user_id, function(err, user){
+            if(user){
+
+                 return res.render('users_profile',{
+                title: 'user profile setup',
+                user:user
+          });
+
+            }else{
+                return res.redirect('/users/sign-in');
+            }
+        })
+
+    }else{
+        return res.redirect('/users/sign-in');
+    }
+
+
+   
  }
 
 
@@ -61,7 +79,7 @@ module.exports.createSessions = function(req, res){
                 return res.redirect('back');
             }
             //handle session creation
-            res.cookie('use_id', user.id);
+            res.cookies('user_id', user.id);
             return res.redirect('/users/profile');
 
          }else{
@@ -71,13 +89,4 @@ module.exports.createSessions = function(req, res){
 
          }
     })
-   
-
-    
-
-    
-
-
-
-    
 }

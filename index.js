@@ -1,7 +1,7 @@
 const express = require('express');
 const cookieParser = require('cookie-parser')
 const app = express();
-const port = 3000;
+const port = 8000;
 const db = require('./config/mongoose');
 
 //const db = require('./config/mongoose');    //mobgoose file require
