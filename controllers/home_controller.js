@@ -1,6 +1,6 @@
 module.exports.home = function(req, res){
     console.log(req.cookies);  //show the value added in cookies which can be added or seen from inspect-application-cookie-localhost
-    res.cookies('user_id', 11)   //change the value of an object in a cookie
+    res.cookie('user_id', 11)   //change the value of an object in a cookie
     return res.render('home',{
          title: "home"
      });

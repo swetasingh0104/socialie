@@ -79,7 +79,7 @@ module.exports.createSessions = function(req, res){
                 return res.redirect('back');
             }
             //handle session creation
-            res.cookies('user_id', user.id);
+            res.cookie('user_id', user.id);
             return res.redirect('/users/profile');
 
          }else{
