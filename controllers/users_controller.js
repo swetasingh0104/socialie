@@ -9,6 +9,10 @@ module.exports.profile = function(req, res){
 
 //render signup page
 module.exports.signUp = function(req, res){
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile')
+    }
+
     return res.render('user_sign_up',{
         title: 'socialie| signup'
     });
@@ -18,6 +22,9 @@ module.exports.signUp = function(req, res){
 //render the signin page
 
 module.exports.signIn = function(req, res){
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile')
+    }
     return res.render('user_sign_in',{
         title: 'socialie| signin'
     });
@@ -50,5 +57,12 @@ module.exports.create = function(req, res){
 //get the sign-in data
 module.exports.createSession = function(req, res){
     //todo
+    return res.redirect('/');
+}
+
+//logout session
+module.exports.destroySession = function(req, res){
+    req.logout();
+
     return res.redirect('/');
 }
