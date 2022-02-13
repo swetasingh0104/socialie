@@ -1,29 +1,25 @@
+const Post = require('../models/post');
+
 module.exports.home = function(req, res){
-    console.log(req.cookies);  //show the value added in cookies which can be added or seen from inspect-application-cookie-localhost
-    res.cookie('user_id', 11)   //change the value of an object in a cookie
-    return res.render('home',{
-         title: "home"
-     });
+    // console.log(req.cookies);
+    // res.cookie('user_id', 25);
 
- // res.end('<h1>express is up for appie</h1>');
+    // Post.find({}, function(err, posts){
+    //     return res.render('home', {
+    //         title: "Codeial | Home",
+    //         posts:  posts
+    //     });
+    // });
+
+    // populate the user of each post
+    Post.find({}).populate('user').exec(function(err, posts){
+        return res.render('home', {
+            title: "Codeial | Home",
+            posts:  posts
+        });
+    })
+      // prints "The author is Ian Fleming"
+
 }
+
 // module.exports.actionName = function(req, res){}
-
-// module.exports.actionName = function(req, res){
-//     return res.end("this action has been taken");
-// }
-
-// //render signup page
-// module.exports.signUp = function(res,req){
-//     return res.render('user_sign_up',{
-//         title: 'socialie| signup'
-//     });
-// }
-
-// //render
-
-// module.exports.signIn = function(res, req){
-//     return res.render('user_sign_in',{
-//         title: 'socialie| signin'
-//     });
-// }
